@@ -9,8 +9,9 @@ if not vim.loop.fs_stat(lazypath) then
 		lazypath,
 	})
 end
-vim.opt.rtp:prepend(lazypath)
--- Install LazyVim
-require("lazy").setup("plugins")
+
 vim.g.lazyvim_check_order = false
-vim.opt.termguicolors = true
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup("plugins")
+require("options")
