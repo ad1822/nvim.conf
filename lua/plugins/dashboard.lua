@@ -31,8 +31,16 @@ return {
           --{ icon = " ", key = "x", desc = "Lazy Extras", action = ":LazyExtras" },
           --{ icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
           --{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
-          { icon = "?", key = "SPACE", desc = "Help", action = "lua require('which-key).show()" }
+          { icon = "?", key = "SPACE", desc = "Help", action = "lua require('which-key).show()" },
+					{ icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
         },
+				sections = {
+					{ section = "header" },
+					{ icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
+					{ icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+					{ icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+					{ section = "startup" },
+				},
 			},
 		},
 	},
