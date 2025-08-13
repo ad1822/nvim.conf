@@ -1,13 +1,68 @@
-return {
-	"snacks.nvim",
-	opts = {
-		dashboard = {
-			preset = {
-				pick = function(cmd, opts)
-					return LazyVim.pick(cmd, opts)()
-				end,
-				header = [[
+local ascii_arts = {
+	[[
 
+ ███▄    █ ▓█████  ▒█████   ██▒   █▓ ██▓ ███▄ ▄███▓
+ ██ ▀█   █ ▓█   ▀ ▒██▒  ██▒▓██░   █▒▓██▒▓██▒▀█▀ ██▒
+▓██  ▀█ ██▒▒███   ▒██░  ██▒ ▓██  █▒░▒██▒▓██    ▓██░
+▓██▒  ▐▌██▒▒▓█  ▄ ▒██   ██░  ▒██ █░░░██░▒██    ▒██ 
+▒██░   ▓██░░▒████▒░ ████▓▒░   ▒▀█░  ░██░▒██▒   ░██▒
+░ ▒░   ▒ ▒ ░░ ▒░ ░░ ▒░▒░▒░    ░ ▐░  ░▓  ░ ▒░   ░  ░
+░ ░░   ░ ▒░ ░ ░  ░  ░ ▒ ▒░    ░ ░░   ▒ ░░  ░      ░
+   ░   ░ ░    ░   ░ ░ ░ ▒       ░░   ▒ ░░      ░   
+]],
+	[[
+
+███▄▄▄▄      ▄████████  ▄██████▄   ▄█    █▄   ▄█    ▄▄▄▄███▄▄▄▄   
+███▀▀▀██▄   ███    ███ ███    ███ ███    ███ ███  ▄██▀▀▀███▀▀▀██▄ 
+███   ███   ███    █▀  ███    ███ ███    ███ ███▌ ███   ███   ███ 
+███   ███  ▄███▄▄▄     ███    ███ ███    ███ ███▌ ███   ███   ███ 
+███   ███ ▀▀███▀▀▀     ███    ███ ███    ███ ███▌ ███   ███   ███ 
+███   ███   ███    ███ ███    ███ ███    ███ ███  ███   ███   ███ 
+███   ███   ███    █▄  ███    ███ ███    ███ ███  ███   ███   ███ 
+ ▀█   █▀    ██████████  ▀██████▀   ▀██████▀  █▀    ▀█   ███   █▀  
+  ]],
+	[[
+ ██████   █████                   █████   █████  ███                 
+░░██████ ░░███                   ░░███   ░░███  ░░░                  
+ ░███░███ ░███   ██████   ██████  ░███    ░███  ████  █████████████  
+ ░███░░███░███  ███░░███ ███░░███ ░███    ░███ ░░███ ░░███░░███░░███ 
+ ░███ ░░██████ ░███████ ░███ ░███ ░░███   ███   ░███  ░███ ░███ ░███ 
+ ░███  ░░█████ ░███░░░  ░███ ░███  ░░░█████░    ░███  ░███ ░███ ░███ 
+ █████  ░░█████░░██████ ░░██████     ░░███      █████ █████░███ █████
+░░░░░    ░░░░░  ░░░░░░   ░░░░░░       ░░░      ░░░░░ ░░░░░ ░░░ ░░░░░ 
+  ]],
+	[[
+
+   ▄████████    ▄████████  ▄████████    ▄█    █▄    ▀█████████▄      ███      ▄█     █▄  
+  ███    ███   ███    ███ ███    ███   ███    ███     ███    ███ ▀█████████▄ ███     ███ 
+  ███    ███   ███    ███ ███    █▀    ███    ███     ███    ███    ▀███▀▀██ ███     ███ 
+  ███    ███  ▄███▄▄▄▄██▀ ███         ▄███▄▄▄▄███▄▄  ▄███▄▄▄██▀      ███   ▀ ███     ███ 
+▀███████████ ▀▀███▀▀▀▀▀   ███        ▀▀███▀▀▀▀███▀  ▀▀███▀▀▀██▄      ███     ███     ███ 
+  ███    ███ ▀███████████ ███    █▄    ███    ███     ███    ██▄     ███     ███     ███ 
+  ███    ███   ███    ███ ███    ███   ███    ███     ███    ███     ███     ███ ▄█▄ ███ 
+  ███    █▀    ███    ███ ████████▀    ███    █▀    ▄█████████▀     ▄████▀    ▀███▀███▀  
+  ]],
+	[[
+
+   █████████                      █████      ███████████  ███████████ █████   ███   █████
+  ███░░░░░███                    ░░███      ░░███░░░░░███░█░░░███░░░█░░███   ░███  ░░███ 
+ ░███    ░███  ████████   ██████  ░███████   ░███    ░███░   ░███  ░  ░███   ░███   ░███ 
+ ░███████████ ░░███░░███ ███░░███ ░███░░███  ░██████████     ░███     ░███   ░███   ░███ 
+ ░███░░░░░███  ░███ ░░░ ░███ ░░░  ░███ ░███  ░███░░░░░███    ░███     ░░███  █████  ███  
+ ░███    ░███  ░███     ░███  ███ ░███ ░███  ░███    ░███    ░███      ░░░█████░█████░   
+ █████   █████ █████    ░░██████  ████ █████ ███████████     █████       ░░███ ░░███     
+░░░░░   ░░░░░ ░░░░░      ░░░░░░  ░░░░ ░░░░░ ░░░░░░░░░░░     ░░░░░         ░░░   ░░░      
+  ]],
+	[[
+
+    e Y8b                     888     888 88b, 88P'888'Y88 Y8b Y8b Y888P 
+   d8b Y8b    888,8,  e88'888 888 ee  888 88P' P'  888  'Y  Y8b Y8b Y8P  
+  d888b Y8b   888 "  d888  '8 888 88b 888 8K       888       Y8b Y8b Y   
+ d888888888b  888    Y888   , 888 888 888 88b,     888        Y8b Y8b    
+d8888888b Y8b 888     "88,e8' 888 888 888 88P'     888         Y8P Y     
+                                                                         
+  ]],
+	[[
 ⠈⠙⠲⢶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣿⡀⠀⠀⠀⠀⠀⠀⠀⡄⠀⠀⡄⠀⠀⠀⠀⠀⠀⠀⣼⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣿⠟⠓⠉
 ⠀⠀⠀⠀⠈⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⢀⣧⣶⣦⣇⠀⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠉⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠙⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣶⣶⣶⣾⣿⣿⣿⣿⣶⣶⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀
@@ -17,30 +72,98 @@ return {
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
- ]],
-        -- stylua: ignore
-        ---@type snacks.dashboard.Item[]
-        keys = {
-          { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
-          --{ icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-          { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
-          { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
-          --{ icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
-          { icon = " ", key = "s", desc = "Restore Session", section = "session" },
-          --{ icon = " ", key = "x", desc = "Lazy Extras", action = ":LazyExtras" },
-          --{ icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
-          --{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
-          { icon = "?", key = "SPACE", desc = "Help", action = "lua require('which-key).show()" },
-					{ icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
-        },
-				sections = {
-					{ section = "header" },
-					{ icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
-					{ icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-					{ icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
-					{ section = "startup" },
+  ]],
+	[[
+
+Y88b Y88                   Y8b Y88888P ,e,             
+ Y88b Y8  ,e e,   e88 88e   Y8b Y888P   "  888 888 8e  
+b Y88b Y d88 88b d888 888b   Y8b Y8P   888 888 888 88b 
+8b Y88b  888   , Y888 888P    Y8b Y    888 888 888 888 
+88b Y88b  "YeeP"  "88 88"      Y8P     888 888 888 888 
+                                                       
+  ]],
+	[[
+
+⠀⢀⣴⣦⠀⠀⠀⠀⢰⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⣰⣿⣿⣿⣷⡀⠀⠀⢸⣿⣷⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⣿⣿⣿⣿⣿⣿⣄⠀⢸⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⣿⣿⣿⠈⢿⣿⣿⣦⢸⣿⣿⡇⠀⣠⠴⠒⠢⣄⠀⠀⣠⠴⠲⠦⣄⠐⣶⣆⠀⠀⢀⣶⡖⢰⣶⠀⢰⣶⣴⡶⣶⣆⣴⡶⣶⣶⡄
+⣿⣿⣿⠀⠀⠻⣿⣿⣿⣿⣿⡇⢸⣁⣀⣀⣀⣘⡆⣼⠁⠀⠀⠀⠘⡇⠹⣿⡄⠀⣼⡿⠀⢸⣿⠀⢸⣿⠁⠀⢸⣿⡏⠀⠀⣿⣿
+⠹⣿⣿⠀⠀⠀⠙⣿⣿⣿⡿⠃⢸⡀⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⢀⡏⠀⢻⣿⣸⣿⠁⠀⢸⣿⠀⢸⣿⠀⠀⢸⣿⡇⠀⠀⣿⣿
+⠀⠈⠻⠀⠀⠀⠀⠈⠿⠋⠀⠀⠈⠳⢤⣀⣠⠴⠀⠈⠧⣄⣀⡠⠞⠁⠀⠀⠿⠿⠃⠀⠀⢸⣿⠀⢸⣿⠀⠀⠸⣿⡇⠀⠀⣿⡿
+]],
+	[[
+
+███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
+████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
+██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
+██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
+██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
+╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
+]],
+}
+
+-- Function to pick a random ASCII art
+local function random_ascii()
+	math.randomseed(os.time())
+	local idx = math.random(1, #ascii_arts)
+	return ascii_arts[idx]
+end
+
+return {
+	"snacks.nvim",
+	opts = {
+		dashboard = {
+			preset = {
+				pick = function(cmd, opts)
+					return LazyVim.pick(cmd, opts)()
+				end,
+				header = random_ascii(),
+				keys = {
+					--					{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+					-- {
+					-- 	icon = " ",
+					-- 	key = "g",
+					-- 	desc = "Find Text",
+					-- 	action = ":lua Snacks.dashboard.pick('live_grep')",
+					-- },
+					--					{
+					-- 	icon = " ",
+					-- 	key = "r",
+					-- 	desc = "Recent Files",
+					-- 	action = ":lua Snacks.dashboard.pick('oldfiles')",
+					-- },
+					{ icon = " ", key = "s", desc = "Restore Session", section = "session" },
+					{ icon = "?", key = "SPACE", desc = "Help", action = "lua require('which-key').show()" },
+					{ icon = " ", key = "p", desc = "Projects", action = ":lua Snacks.picker.projects()" },
 				},
+			},
+			sections = {
+				{ pane = 1, section = "header" },
+				{ pane = 1, section = "keys", indent = 1, gap = 1, padding = 1 },
+				function()
+					local in_git = Snacks.git.get_root() ~= nil
+					if not in_git then
+						return {}
+					end
+					return {
+						{
+							pane = 1,
+							icon = " ",
+							title = "Git Status  ",
+							section = "terminal",
+							enabled = function()
+								return Snacks.git.get_root() ~= nil
+							end,
+							cmd = "git status --short --branch --renames",
+							height = 5,
+							padding = 1,
+							ttl = 5 * 60,
+							indent = 3,
+						},
+					}
+				end,
+				{ pane = 1, section = "startup", padding = 0 },
 			},
 		},
 	},

@@ -3,6 +3,13 @@ return {
 	priority = 1000,
 	lazy = false,
 	opts = {
+		terminal = {
+			win = {
+				wo = {
+					winbar = "",
+				},
+			},
+		},
 		styles = {},
 		picker = {
 			hidden = true,
