@@ -7,11 +7,12 @@
 | -------------------- | ------------------------ |
 | ![neovim](image.png) | ![alt text](image-2.png) |
 
-# Keybindings for Nvim
+
 
 ---
 
-### **Neovim Keybindings Overview**
+## **Neovim Keybindings Overview**
+
 
 | Category                    | Keybinding            | Action                        | Rating             |     |
 | --------------------------- | --------------------- | ----------------------------- | ------------------ | --- |
