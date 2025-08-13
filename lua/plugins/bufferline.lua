@@ -6,7 +6,7 @@ return {
 			mode = "buffers",
 			separator_style = "slant",
 			diagnostics = "nvim_lsp",
-			diagnostics_update_on_event = true, -- use nvim's diagnostic handler
+			diagnostics_update_on_event = true,
 			hover = {
 				enabled = true,
 				delay = 200,
@@ -19,8 +19,8 @@ return {
 		},
 		highlights = {
 			buffer_selected = {
-				underline = true, -- underlines the active buffer
-				sp = "#cba6f7", -- underline color (same as `special` in vim highlights)
+				underline = true,
+				sp = "#cba6f7",
 				bold = true,
 				italic = false,
 			},

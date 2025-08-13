@@ -8,6 +8,7 @@ return {
 			flavour = "mocha",
 			custom_highlights = function()
 				return {
+					-- Custom Backgroup (mantle) color
 					Normal = { bg = "#181825" },
 				}
 			end,

@@ -113,7 +113,6 @@ b Y88b Y d88 88b d888 888b   Y8b Y8P   888 888 888 88b
 ]],
 }
 
--- Function to pick a random ASCII art
 local function random_ascii()
 	math.randomseed(os.time())
 	local idx = math.random(1, #ascii_arts)

@@ -10,35 +10,34 @@ vim.cmd("set tabstop=2")
 vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
 
-vim.opt.swapfile = false
+vim.opt.swapfile = true
 
 vim.wo.number = true
 vim.wo.relativenumber = true
 
 -- UI & Display
-vim.opt.cursorline = true -- Highlight current line
-vim.opt.signcolumn = "yes" -- Always show the sign column to avoid text shifting
-vim.opt.wrap = false -- No line wrapping by default
-vim.opt.scrolloff = 8 -- Keep 8 lines visible above/below cursor
-vim.opt.sidescrolloff = 8 -- Keep 8 columns visible left/right of cursor
+vim.opt.cursorline = true
+vim.opt.signcolumn = "yes"
+vim.opt.wrap = false
+vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 8
 
 -- Searching
-vim.opt.ignorecase = true -- Ignore case in search patterns
-vim.opt.smartcase = true -- Override ignorecase if search contains uppercase
-vim.opt.incsearch = true -- Show search matches as you type
-vim.opt.hlsearch = true -- Highlight all search matches
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.incsearch = true
+vim.opt.hlsearch = true
 
 -- Indentation
-vim.opt.smartindent = true -- Smart autoindent on new lines
--- You already set tabstop, shiftwidth, expandtab above
+vim.opt.smartindent = true
 
 -- Performance
-vim.opt.updatetime = 250 -- Faster completion and diagnostics updates
-vim.opt.timeoutlen = 400 -- Faster key sequence timeout
+vim.opt.updatetime = 250
+vim.opt.timeoutlen = 400
 
 -- Clipboard
-vim.opt.clipboard = "unnamedplus" -- Use system clipboard
+vim.opt.clipboard = "unnamedplus"
 
 -- Splits
-vim.opt.splitright = true -- Vertical splits to the right
-vim.opt.splitbelow = true -- Horizontal splits below
+vim.opt.splitright = true
+vim.opt.splitbelow = true

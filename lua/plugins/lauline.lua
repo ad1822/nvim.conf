@@ -3,16 +3,16 @@ return {
 	opts = {
 		options = {
 			icons_enabled = true,
-			theme = "catppuccin", -- You can use "gruvbox", "onedark", etc.
+			theme = "catppuccin",
 			component_separators = { left = "", right = "" },
 			section_separators = { left = "", right = "" },
-			globalstatus = true, -- One statusline for the whole screen
+			globalstatus = true,
 		},
 		sections = {
 			lualine_a = { "mode" },
 			lualine_b = { "branch", "diff", "diagnostics" },
 			lualine_c = {
-				{ "filename", path = 1 }, -- path=0 just filename, path=1 relative, path=2 absolute
+				{ "filename", path = 0 }, -- path=0 just filename, path=1 relative, path=2 absolute
 				{ "filesize" },
 			},
 			lualine_x = {
@@ -21,7 +21,7 @@ return {
 				{ "filetype" },
 				{ "searchcount" },
 				{ "selectioncount" },
-				{ "os.date('%H:%M')", icon = "" }, -- clock
+				{ "os.date('%H:%M')", icon = "" },
 			},
 			lualine_y = { "progress" },
 			lualine_z = { "location" },
