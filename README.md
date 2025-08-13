@@ -1,5 +1,8 @@
 # Neovim Config
 
+- Custom setup built on LazyVim with snacks.nvim for a clean and responsive editing experience.
+
+
 |     |   |
 | -------------------- | ------------------------ |
 | ![neovim](image.png) | ![alt text](image-2.png) |
