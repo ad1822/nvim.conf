@@ -172,6 +172,13 @@ return {
 				q = "cancel",
 			},
 		},
+		{
+			"folke/snacks.nvim",
+			---@type snacks.Config
+			opts = {
+				scroll = {},
+			},
+		},
 		picker = {
 			layout = {
 				preset = "telescope",
