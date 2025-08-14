@@ -3,6 +3,9 @@ return {
 	priority = 1000,
 	lazy = false,
 	opts = {
+		lazygit = {
+			configure = true,
+		},
 		notifier = {
 			padding = true,
 			timeout = 5000,
@@ -10,14 +13,165 @@ return {
 			top_down = true,
 			margin = { top = 1, right = 1, bottom = 0 },
 		},
-		terminal = {
-			win = {
-				wo = {
-					winbar = "",
+		toggle = {
+			which_key = true,
+			notify = true,
+			icon = {
+				enabled = " ",
+				disabled = " ",
+			},
+		},
+		gitbrowse = {
+			notify = true, -- show notification on open
+			-- Handler to open the url in a browser
+			---@param url string
+			open = function(url)
+				if vim.fn.has("nvim-0.10") == 0 then
+					require("lazy.util").open(url, { system = true })
+					return
+				end
+				vim.ui.open(url)
+			end,
+			---@type "repo" | "branch" | "file" | "commit" | "permalink"
+			what = "commit", -- what to open. not all remotes support all types
+			branch = nil, ---@type string?
+			line_start = nil, ---@type number?
+			line_end = nil, ---@type number?
+			-- patterns to transform remotes to an actual URL
+			remote_patterns = {
+				{ "^(https?://.*)%.git$", "%1" },
+				{ "^git@(.+):(.+)%.git$", "https://%1/%2" },
+				{ "^git@(.+):(.+)$", "https://%1/%2" },
+				{ "^git@(.+)/(.+)$", "https://%1/%2" },
+				{ "^org%-%d+@(.+):(.+)%.git$", "https://%1/%2" },
+				{ "^ssh://git@(.*)$", "https://%1" },
+				{ "^ssh://([^:/]+)(:%d+)/(.*)$", "https://%1/%3" },
+				{ "^ssh://([^/]+)/(.*)$", "https://%1/%2" },
+				{ "ssh%.dev%.azure%.com/v3/(.*)/(.*)$", "dev.azure.com/%1/_git/%2" },
+				{ "^https://%w*@(.*)", "https://%1" },
+				{ "^git@(.*)", "https://%1" },
+				{ ":%d+", "" },
+				{ "%.git$", "" },
+			},
+			url_patterns = {
+				["github%.com"] = {
+					branch = "/tree/{branch}",
+					file = "/blob/{branch}/{file}#L{line_start}-L{line_end}",
+					permalink = "/blob/{commit}/{file}#L{line_start}-L{line_end}",
+					commit = "/commit/{commit}",
+				},
+				["gitlab%.com"] = {
+					branch = "/-/tree/{branch}",
+					file = "/-/blob/{branch}/{file}#L{line_start}-L{line_end}",
+					permalink = "/-/blob/{commit}/{file}#L{line_start}-L{line_end}",
+					commit = "/-/commit/{commit}",
+				},
+				["bitbucket%.org"] = {
+					branch = "/src/{branch}",
+					file = "/src/{branch}/{file}#lines-{line_start}-L{line_end}",
+					permalink = "/src/{commit}/{file}#lines-{line_start}-L{line_end}",
+					commit = "/commits/{commit}",
+				},
+				["git.sr.ht"] = {
+					branch = "/tree/{branch}",
+					file = "/tree/{branch}/item/{file}",
+					permalink = "/tree/{commit}/item/{file}#L{line_start}",
+					commit = "/commit/{commit}",
 				},
 			},
 		},
+		terminal = {
+			bo = {
+				filetype = "snacks_terminal",
+			},
+			wo = {},
+			keys = {
+				q = "hide",
+				gf = function(self)
+					local f = vim.fn.findfile(vim.fn.expand("<cfile>"), "**")
+					if f == "" then
+						Snacks.notify.warn("No file under cursor")
+					else
+						self:hide()
+						vim.schedule(function()
+							vim.cmd("e " .. f)
+						end)
+					end
+				end,
+				term_normal = {
+					"<esc>",
+					function(self)
+						self.esc_timer = self.esc_timer or (vim.uv or vim.loop).new_timer()
+						if self.esc_timer:is_active() then
+							self.esc_timer:stop()
+							vim.cmd("stopinsert")
+						else
+							self.esc_timer:start(200, 0, function() end)
+							return "<esc>"
+						end
+					end,
+					mode = "t",
+					expr = true,
+					desc = "Double escape to normal mode",
+				},
+			},
+		},
+		zen = {
+			toggles = {
+				dim = true,
+			},
+			enter = true,
+			fixbuf = false,
+			minimal = true,
+			width = 10,
+			height = 10,
+			backdrop = { transparent = true, blend = 40 },
+			keys = { q = false },
+			zindex = 40,
+			wo = {
+				winhighlight = "NormalFloat:Normal",
+			},
+			w = {
+				snacks_main = true,
+			},
+		},
 		styles = {},
+		input = {
+			backdrop = true,
+			position = "float",
+			border = "double",
+			title_pos = "center",
+			height = 1,
+			width = 60,
+			relative = "editor",
+			noautocmd = true,
+			row = 2,
+			-- relative = "cursor",
+			-- row = -3,
+			-- col = 0,
+			wo = {
+				winhighlight = "NormalFloat:SnacksInputNormal,FloatBorder:SnacksInputBorder,FloatTitle:SnacksInputTitle",
+				cursorline = false,
+			},
+			bo = {
+				filetype = "snacks_input",
+				buftype = "prompt",
+			},
+			--- buffer local variables
+			b = {
+				completion = false, -- disable blink completions in input
+			},
+			keys = {
+				n_esc = { "<esc>", { "cmp_close", "cancel" }, mode = "n", expr = true },
+				i_esc = { "<esc>", { "cmp_close", "stopinsert" }, mode = "i", expr = true },
+				i_cr = { "<cr>", { "cmp_accept", "confirm" }, mode = { "i", "n" }, expr = true },
+				i_tab = { "<tab>", { "cmp_select_next", "cmp" }, mode = "i", expr = true },
+				i_ctrl_w = { "<c-w>", "<c-s-w>", mode = "i", expr = true },
+				i_up = { "<up>", { "hist_up" }, mode = { "i", "n" } },
+				i_down = { "<down>", { "hist_down" }, mode = { "i", "n" } },
+				q = "cancel",
+			},
+		},
 		picker = {
 			layout = {
 				preset = "telescope",
@@ -41,8 +195,8 @@ return {
 			},
 		},
 	},
-	config = function(_, opts)
-		require("snacks").setup(opts)
-		Snacks.toggle.dim():set(true)
-	end,
+	-- config = function(_, opts)
+	-- 	require("snacks").setup(opts)
+	-- 	Snacks.toggle.dim():set(true)
+	-- end,
 }
