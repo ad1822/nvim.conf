@@ -5,11 +5,11 @@
 
 |     |   |
 | -------------------- | ------------------------ |
-| ![neovim](image.png) | ![alt text](image-2.png) |
+| ![neovim](assets/image.png) | ![alt text](assets/image-2.png) |
 
 
 
-## 👍🏻 Recommended workflow (From Hard Time Nvim)
+## Recommended workflow (From Hard Time Nvim)
 
 > Instead of only relying on hjkl, arrow keys and mouse, you should:
 
