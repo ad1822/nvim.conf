@@ -20,6 +20,15 @@ require("lazy").setup({
 			import = "plugins",
 		},
 		{
+			import = "plugins.ui",
+		},
+		{
+			import = "plugins.utils",
+		},
+		{
+			import = "plugins.dev",
+		},
+		{
 			import = "plugins.git",
 		},
 	},
