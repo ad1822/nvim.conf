@@ -11,9 +11,9 @@ return {
 
 		-- Smear Effect
 		smear_insert_mode = true,
-		stiffness = 0.5,
+		stiffness = 1,
 		trailing_stiffness = 0.5,
 		damping = 0.67,
-		matrix_pixel_threshold = 0.5,
+		matrix_pixel_threshold = 0.1,
 	},
 }
