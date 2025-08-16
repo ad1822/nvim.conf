@@ -22,7 +22,7 @@ return {
 		views = {
 			cmdline_popup = {
 				border = {
-					style = "double", -- no border
+					style = "rounded",
 					padding = { 0, 1 }, -- top/bottom, left/right padding
 				},
 				filter_option = {},

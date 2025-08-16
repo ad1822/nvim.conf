@@ -13,9 +13,6 @@ vim.cmd("set shiftwidth=2")
 vim.wo.number = true
 vim.wo.relativenumber = true
 
-vim.keymap.set("n", "<C-d>", "5<C-d>", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-u>", "5<C-u>", { noremap = true, silent = true })
-
 vim.keymap.set("n", "<A-h>", require("smart-splits").resize_left)
 vim.keymap.set("n", "<A-j>", require("smart-splits").resize_down)
 vim.keymap.set("n", "<A-k>", require("smart-splits").resize_up)

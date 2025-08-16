@@ -182,7 +182,7 @@ return {
 		},
 		picker = {
 			layout = {
-				preset = "telescope",
+				-- preset = "telescope",
 			},
 			hidden = true,
 			sources = {
@@ -203,8 +203,15 @@ return {
 			},
 		},
 	},
-	-- config = function(_, opts)
+	config = function(_, opts)
+		require("snacks").setup(opts)
+		-- Set 5 lines for scrolling
+		vim.keymap.set("n", "<C-d>", "5<C-d>", { noremap = true, silent = true })
+		vim.keymap.set("n", "<C-u>", "5<C-u>", { noremap = true, silent = true })
+		-- Enable dim by default
+		Snacks.toggle.dim():set(true)
+	end,
+	-- conig = function(_, opts)
 	-- 	require("snacks").setup(opts)
-	-- 	Snacks.toggle.dim():set(true)
 	-- end,
 }

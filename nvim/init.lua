@@ -12,7 +12,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 vim.g.lazyvim_check_order = false
-
 -- Load configuration
 require("lazy").setup({
 	spec = {
