@@ -22,6 +22,62 @@
 
 ---
 
+### Vim Motions Cheat Sheet (Words, Quotes, and Brackets)
+
+* **Changing or deleting words**
+
+  * `ciw` – Change *inner word* (removes the word under cursor and enters Insert mode).
+  * `caw` – Change *a word* (word + trailing space) and enter Insert mode.
+
+* **Selecting text inside delimiters**
+
+  * `vi"` – Visual select everything *inside* quotes `" "`.
+  * `vib` – Visual select everything *inside* parentheses `( )` or brackets `[ ]`.
+
+* **Inserting at specific positions**
+
+  * `Shift + A` (`A`) – Append text at the *end of the line*.
+  * `Shift + I` (`I`) – Insert text at the *start of the line*.
+
+---
+
+### Motion Format
+
+In Vim, many commands follow this consistent pattern:
+
+```
+<operator> + <a/i> + <text object>
+```
+
+* **Operator examples:**
+
+  * `c` – change
+  * `d` – delete
+  * `y` – yank
+  * `v` – visually select
+
+* **Scope:**
+
+  * `i` – *inner* (inside only)
+  * `a` – *around* (including delimiters)
+
+* **Text objects:**
+
+  * `w` – word
+  * `"` – quotes
+  * `b` – brackets or parentheses
+  * `)` – parentheses specifically
+  * `}` – braces
+
+**Examples:**
+
+* `ci"` – change *inside quotes*
+* `va(` – visually select *around parentheses*
+* `di}` – delete *inside braces*
+
+---
+
+
 ## **Neovim Keybindings Overview**
 
 
