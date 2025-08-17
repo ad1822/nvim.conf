@@ -182,7 +182,8 @@ return {
 		},
 		picker = {
 			layout = {
-				-- preset = "telescope",
+				preset = "telescope",
+				border = "none",
 			},
 			hidden = true,
 			sources = {
@@ -191,7 +192,7 @@ return {
 				},
 				explorer = {
 					layout = {
-						-- auto_hide = { "input" },
+						auto_hide = { "input" },
 					},
 				},
 				cliphist = {
@@ -209,7 +210,7 @@ return {
 		vim.keymap.set("n", "<C-d>", "5<C-d>", { noremap = true, silent = true })
 		vim.keymap.set("n", "<C-u>", "5<C-u>", { noremap = true, silent = true })
 		-- Enable dim by default
-		Snacks.toggle.dim():set(true)
+		-- Snacks.toggle.dim():set(true)
 	end,
 	-- conig = function(_, opts)
 	-- 	require("snacks").setup(opts)
