@@ -8,7 +8,7 @@ return {
 		-- Disable everything except LSP
 		messages = { enabled = false },
 		cmdline = {
-			enabled = true,
+			enabled = false,
 			view = "cmdline_popup", -- popup style for cmdline
 			format = {
 				cmdline = { icon = "" },
