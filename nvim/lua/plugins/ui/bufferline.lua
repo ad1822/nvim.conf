@@ -12,21 +12,15 @@ return {
 				delay = 200,
 				reveal = { "close" },
 			},
-
-			--	numbers = function(opts)
-			--		return string.format("%s·%s", opts.raise(opts.id), opts.lower(opts.id))
-			--	end,
 		},
 		highlights = {
 			buffer_selected = {
-				underline = true,
-				sp = "#cba6f7",
-				bold = true,
-				italic = false,
+				fg = "#b4befe", -- lavender
+				bold = false,
+				italic = true,
 			},
 			tab_selected = {
-				underline = true,
-				sp = "#cba6f7",
+				fg = "#b4befe", -- lavender
 				bold = true,
 			},
 		},
