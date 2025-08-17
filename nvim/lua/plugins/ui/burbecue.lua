@@ -4,47 +4,173 @@ return {
 	version = "*",
 	dependencies = {
 		"SmiteshP/nvim-navic",
-		"nvim-tree/nvim-web-devicons",
+		"nvim-tree/nvim-web-devicons", -- optional dependency
+	},
+	opts = {
+		-- configurations go here
+	},
+	Config = {
+		---Whether to attach navic to language servers automatically.
+		---
+		---@type boolean
+		attach_navic = true,
+
+		---Whether to create winbar updater autocmd.
+		---
+		---@type boolean
+		create_autocmd = true,
+
+		---Buftypes to enable winbar in.
+		---
+		---@type string[]
+		include_buftypes = { "" },
+
+		---Filetypes not to enable winbar in.
+		---
+		---@type string[]
+		exclude_filetypes = { "netrw", "toggleterm" },
+
+		modifiers = {
+			---Filename modifiers applied to dirname.
+			---
+			---See: `:help filename-modifiers`
+			---
+			---@type string
+			dirname = ":~:.",
+
+			---Filename modifiers applied to basename.
+			---
+			---See: `:help filename-modifiers`
+			---
+			---@type string
+			basename = "",
+		},
+
+		---Whether to display path to file.
+		---
+		---@type boolean
+		show_dirname = true,
+
+		---Whether to display file name.
+		---
+		---@type boolean
+		show_basename = true,
+
+		---Whether to replace file icon with the modified symbol when buffer is
+		---modified.
+		---
+		---@type boolean
+		show_modified = false,
+
+		---Get modified status of file.
+		---
+		---NOTE: This can be used to get file modified status from SCM (e.g. git)
+		---
+		---@type fun(bufnr: number): boolean
+		modified = function(bufnr)
+			return vim.bo[bufnr].modified
+		end,
+
+		---Whether to show/use navic in the winbar.
+		---
+		---@type boolean
+		show_navic = true,
+
+		---Get leading custom section contents.
+		---
+		---NOTE: This function shouldn't do any expensive actions as it is run on each
+		---render.
+		---
+		---@type fun(bufnr: number, winnr: number): barbecue.Config.custom_section
+		lead_custom_section = function()
+			return " "
+		end,
+
+		---@alias barbecue.Config.custom_section
+		---|string # Literal string.
+		---|{ [1]: string, [2]: string? }[] # List-like table of `[text, highlight?]` tuples in which `highlight` is optional.
+		---
+		---Get custom section contents.
+		---
+		---NOTE: This function shouldn't do any expensive actions as it is run on each
+		---render.
+		---
+		---@type fun(bufnr: number, winnr: number): barbecue.Config.custom_section
+		custom_section = function()
+			return " "
+		end,
+
+		---@alias barbecue.Config.theme
+		---|'"auto"' # Use your current colorscheme's theme or generate a theme based on it.
+		---|string # Theme located under `barbecue.theme` module.
+		---|barbecue.Theme # Same as '"auto"' but override it with the given table.
+		---
+		---Theme to be used for generating highlight groups dynamically.
+		---
+		---@type barbecue.Config.theme
+		theme = "auto",
+
+		---Whether context text should follow its icon's color.
+		---
+		---@type boolean
+		context_follow_icon_color = false,
+
+		symbols = {
+			---Modification indicator.
+			---
+			---@type string
+			modified = "●",
+
+			---Truncation indicator.
+			---
+			---@type string
+			ellipsis = "…",
+
+			---Entry separator.
+			---
+			---@type string
+			separator = "",
+		},
+
+		---@alias barbecue.Config.kinds
+		---|false # Disable kind icons.
+		---|table<string, string> # Type to icon mapping.
+		---
+		---Icons for different context entry kinds.
+		---
+		---@type barbecue.Config.kinds
+		kinds = {
+			File = "",
+			Module = "",
+			Namespace = "",
+			Package = "",
+			Class = "",
+			Method = "",
+			Property = "",
+			Field = "",
+			Constructor = "",
+			Enum = "",
+			Interface = "",
+			Function = "",
+			Variable = "",
+			Constant = "",
+			String = "",
+			Number = "",
+			Boolean = "",
+			Array = "",
+			Object = "",
+			Key = "",
+			Null = "",
+			EnumMember = "",
+			Struct = "",
+			Event = "",
+			Operator = "",
+			TypeParameter = "",
+		},
 	},
 	config = function()
 		require("barbecue").setup({
-			theme = {
-				normal = { fg = "#c6d0f5" }, -- text
-				ellipsis = { fg = "#737aa2" }, -- faded
-				separator = { fg = "#737aa2" }, -- faded
-				modified = { fg = "#f5bde6" }, -- pink for modified files
-
-				dirname = { fg = "#737aa2" }, -- faded
-				basename = { fg = "#c6d0f5", bold = true },
-
-				context_file = { fg = "#f5bde6" },
-				context_module = { fg = "#f5bde6" },
-				context_namespace = { fg = "#f5bde6" },
-				context_package = { fg = "#f5bde6" },
-				context_class = { fg = "#f5bde6" },
-				context_method = { fg = "#f5bde6" },
-				context_property = { fg = "#f5bde6" },
-				context_field = { fg = "#f5bde6" },
-				context_constructor = { fg = "#f5bde6" },
-				context_enum = { fg = "#f5bde6" },
-				context_interface = { fg = "#f5bde6" },
-				context_function = { fg = "#f5bde6" },
-				context_variable = { fg = "#f5bde6" },
-				context_constant = { fg = "#f5bde6" },
-				context_string = { fg = "#bae67e" }, -- green
-				context_number = { fg = "#ffb454" }, -- orange
-				context_boolean = { fg = "#ff757f" }, -- red
-				context_array = { fg = "#36d0e0" }, -- teal
-				context_object = { fg = "#8aadf4" }, -- blue
-				context_key = { fg = "#eed49f" }, -- yellow
-				context_null = { fg = "#ff757f" }, -- red
-				context_enum_member = { fg = "#f5bde6" }, -- pink
-				context_struct = { fg = "#f5bde6" }, -- pink
-				context_event = { fg = "#f5bde6" }, -- pink
-				context_operator = { fg = "#8aadf4" }, -- blue
-				context_type_parameter = { fg = "#eed49f" }, -- yellow
-			},
+			theme = "catppuccin-mocha", -- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
 		})
 	end,
-	opts = {},
 }
