@@ -75,6 +75,17 @@ In Vim, many commands follow this consistent pattern:
 * `va(` – visually select *around parentheses*
 * `di}` – delete *inside braces*
 
+- `+ . - Go to previous editing line
+- M + a - To bookmark line to a
+- ` + a - Go to bookmark a
+- f + letter - Jump to that letter , Use ; and , for jump to next and previous
+- gUw - To make a word capital 
+- guw - To make a word small
+- gUU - To make a whole line capital
+- guu - to make a whole line small
+- ctrl + a - To increment a number by one
+- ctrl + x - To decrease a number by one
+
 ---
 
 
