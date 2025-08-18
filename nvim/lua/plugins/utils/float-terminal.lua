@@ -4,9 +4,9 @@ return {
 	config = function()
 		vim.g.floaterm_width = 0.8
 		vim.g.floaterm_height = 0.8
-		-- Toggle floaterm named "MyTerm" with Ctrl+\
-		vim.keymap.set("n", "<C-\\>", "<Cmd>FloatermToggle myterm<CR>", { noremap = true, silent = true })
-		vim.keymap.set("t", "<C-\\>", "<Cmd>FloatermToggle myterm<CR>", { noremap = true, silent = true })
+
+		vim.keymap.set("n", "<C-\\>", "<Cmd>FloatermToggle <CR>", { noremap = true, silent = true })
+		vim.keymap.set("t", "<C-\\>", "<Cmd>FloatermToggle <CR>", { noremap = true, silent = true })
 
 		-- Optional: Auto-close all floaterms on exit
 		vim.cmd([[

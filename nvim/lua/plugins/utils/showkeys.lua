@@ -81,6 +81,15 @@ return {
 	{
 		"nvzone/showkeys",
 		cmd = "ShowkeysToggle",
+		keys = {
+			{
+				"<leader>SS",
+				function()
+					vim.cmd("ShowkeysToggle")
+				end,
+				desc = "Toggle showkeys",
+			},
+		},
 		opts = {
 			-- position = "bottom-right",
 			maxkeys = 3,

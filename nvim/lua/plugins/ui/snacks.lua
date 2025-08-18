@@ -15,6 +15,9 @@ return {
 		},
 		toggle = {
 			which_key = true,
+			opts = {
+				wrap = true,
+			},
 			notify = true,
 			icon = {
 				enabled = " ",
@@ -136,7 +139,13 @@ return {
 				snacks_main = true,
 			},
 		},
-		styles = {},
+		styles = {
+			notication = {
+				wo = {
+					wrap = true,
+				},
+			},
+		},
 		input = {
 			backdrop = true,
 			position = "float",
@@ -210,7 +219,7 @@ return {
 		vim.keymap.set("n", "<C-d>", "5<C-d>", { noremap = true, silent = true })
 		vim.keymap.set("n", "<C-u>", "5<C-u>", { noremap = true, silent = true })
 		-- Enable dim by default
-		-- Snacks.toggle.dim():set(true)
+		Snacks.toggle.dim():set(true)
 	end,
 	-- conig = function(_, opts)
 	-- 	require("snacks").setup(opts)
