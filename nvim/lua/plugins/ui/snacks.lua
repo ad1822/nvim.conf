@@ -215,4 +215,187 @@ return {
 	-- conig = function(_, opts)
 	-- 	require("snacks").setup(opts)
 	-- end,
-}
+},
+	vim.schedule(function()
+		-- get the original layouts table from the plugin
+		local layouts = require("snacks.picker.config.layouts")
+
+		layouts.default = {
+			layout = {
+				box = "horizontal",
+				width = 0.8,
+				min_width = 120,
+				border = "rounded",
+				height = 0.8,
+				{
+					box = "vertical",
+					border = "none",
+					title = "{title} {live} ",
+					{ win = "input", height = 1, border = "bottom" },
+					{ win = "list", border = "none" },
+				},
+				{ win = "preview", title = "{preview}", border = "left", width = 0.5 },
+			},
+		}
+
+		layouts.sidebar = {
+			preview = "main",
+			layout = {
+				backdrop = false,
+				width = 30,
+				min_width = 40,
+				height = 0,
+				position = "right",
+				border = "none",
+				box = "vertical",
+				{
+					win = "input",
+					height = 1,
+					border = "bottom",
+					title = "{live} ",
+					title_pos = "center",
+				},
+				{ win = "list", border = "none" },
+				{ win = "preview", title = "{preview}", height = 0.4, border = "top" },
+			},
+		}
+
+		layouts.telescope = {
+			reverse = false,
+			layout = {
+				box = "horizontal",
+				backdrop = false,
+				width = 0.9,
+				height = 0.8,
+				border = "none",
+				{
+					box = "vertical",
+					{ win = "list", title = " Results ", title_pos = "center", border = "rounded" },
+					{ win = "input", height = 1, border = "rounded", title = "{title} {live} ", title_pos = "center" },
+				},
+				{
+					win = "preview",
+					title = "{preview:Preview}",
+					width = 0.50,
+					border = "rounded",
+					title_pos = "center",
+				},
+			},
+		}
+
+		layouts.ivy = {
+			layout = {
+				box = "vertical",
+				backdrop = false,
+				row = -1,
+				width = 0,
+				height = 0.4,
+				border = "top",
+				title = " {title} {live} ",
+				title_pos = "left",
+				{ win = "input", height = 1, border = "bottom" },
+				{
+					box = "horizontal",
+					{ win = "list", border = "none" },
+					{ win = "preview", title = "{preview}", width = 0.6, border = "left" },
+				},
+			},
+		}
+
+		layouts.ivy_split = {
+			preview = "main",
+			layout = {
+				box = "vertical",
+				backdrop = false,
+				width = 0,
+				height = 0.4,
+				position = "bottom",
+				border = "top",
+				title = " {title} {live} ",
+				title_pos = "left",
+				{ win = "input", height = 1, border = "bottom" },
+				{
+					box = "horizontal",
+					{ win = "list", border = "none" },
+					{ win = "preview", title = "{preview}", width = 0.6, border = "left" },
+				},
+			},
+		}
+
+		layouts.dropdown = {
+			layout = {
+				backdrop = false,
+				row = 1,
+				width = 0.4,
+				min_width = 80,
+				height = 0.8,
+				border = "none",
+				box = "vertical",
+				{ win = "preview", title = "{preview}", height = 0.4, border = "rounded" },
+				{
+					box = "vertical",
+					border = "rounded",
+					title = "{title} {live} ",
+					title_pos = "center",
+					{ win = "input", height = 1, border = "bottom" },
+					{ win = "list", border = "none" },
+				},
+			},
+		}
+
+		layouts.vertical = {
+			layout = {
+				backdrop = false,
+				width = 0.5,
+				min_width = 80,
+				height = 0.8,
+				min_height = 30,
+				box = "vertical",
+				border = "rounded",
+				title = "{title} {live} ",
+				title_pos = "center",
+				{ win = "input", height = 1, border = "bottom" },
+				{ win = "list", border = "none" },
+				{ win = "preview", title = "{preview}", height = 0.4, border = "top" },
+			},
+		}
+
+		layouts.select = {
+			preview = false,
+			layout = {
+				backdrop = false,
+				width = 0.5,
+				min_width = 80,
+				height = 0.4,
+				min_height = 3,
+				box = "vertical",
+				border = "rounded",
+				title = "{title}",
+				title_pos = "center",
+				{ win = "input", height = 1, border = "bottom" },
+				{ win = "list", border = "none" },
+				{ win = "preview", title = "{preview}", height = 0.4, border = "top" },
+			},
+		}
+
+		layouts.vscode = {
+			preview = false,
+			layout = {
+				backdrop = false,
+				row = 1,
+				width = 0.4,
+				min_width = 80,
+				height = 0.8,
+				border = "rounded",
+				box = "vertical",
+				{ win = "input", height = 1, border = "rounded", title = "{title} {live} ", title_pos = "center" },
+				{ win = "list", border = "hpad" },
+				{ win = "preview", title = "{preview}", border = "rounded" },
+			},
+		}
+
+		layouts.left = layouts.sidebar
+		layouts.right = { preset = "sidebar", layout = { position = "right" } }
+		layouts.top = { preset = "ivy", layout = { position = "top" } }
+		layouts.bottom = { preset = "ivy", layout = { position = "bottom" } }
+	end)

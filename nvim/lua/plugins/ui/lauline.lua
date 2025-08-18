@@ -1,6 +1,6 @@
 local colors = {
 	color0 = "#1e1e2e", -- Catppuccin Mocha: Base (darkest background)
-	color1 = "#45475a", -- Catppuccin Mocha: Surface1 (slightly lighter background)
+	color1 = "#313244", -- Catppuccin Mocha: Surface1 (slightly lighter background)
 	color2 = "#585b70", -- Catppuccin Mocha: Surface2 (another background shade)
 	color3 = "#cdd6f4", -- Catppuccin Mocha: Text (light foreground color)
 
@@ -53,39 +53,41 @@ return {
 		options = {
 			icons_enabled = true,
 			theme = mocha,
-			component_separators = {},
-			section_separators = {},
+			component_separators = { left = "::", right = "::" },
+			section_separators = { left = "", right = "" },
 			globalstatus = true,
 		},
 		sections = {
 			lualine_a = { "mode" },
-			lualine_b = { "branch", "diff", "diagnostics" },
+			lualine_b = { {
+				"branch",
+				icon = "󰘬",
+			}, "diff", "diagnostics" },
+
 			lualine_c = {
 				{ "filename", path = 0 }, -- path=0 just filename, path=1 relative, path=2 absolute
-				-- { "filesize" },
-			},
-			lualine_x = {
-				function()
-					local encoding = vim.o.fileencoding
-					if encoding == "" then
-						return vim.bo.fileformat .. " :: " .. vim.bo.filetype
-					else
-						return encoding .. " :: " .. vim.bo.fileformat .. " :: " .. vim.bo.filetype
-					end
-				end,
+				{ "filesize" },
 			},
 			-- lualine_x = {
-			-- 	{ "encoding" },
-			-- 	-- { "fileformat" },
-			-- 	{ "filetype" },
-			-- 	{ "searchcount" },
-			-- 	{ "selectioncount" },
-			-- 	{
-			-- 		"os.date('%H:%M')",
-			-- 		icon = "",
-			-- 	},
+			-- 	function()
+			-- 		local encoding = vim.o.fileencoding
+			-- 		if encoding == "" then
+			-- 			return vim.bo.fileformat .. " :: " .. vim.bo.filetype
+			-- 		else
+			-- 			return encoding .. " :: " .. vim.bo.fileformat .. " :: " .. vim.bo.filetype
+			-- 		end
+			-- 	end,
 			-- },
-			lualine_y = { "progress" },
+			lualine_x = {
+				{ "encoding" },
+				-- { "fileformat" },
+				{ "filetype" },
+				{ "searchcount" },
+				{ "selectioncount" },
+			},
+			lualine_y = { "progress", {
+				"os.date('%H:%M')",
+			} },
 			lualine_z = { "location" },
 		},
 		inactive_sections = {
