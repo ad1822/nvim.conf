@@ -82,6 +82,7 @@ return {
 				{ "encoding" },
 				-- { "fileformat" },
 				{ "filetype" },
+				{ "lsp" },
 				{ "searchcount" },
 				{ "selectioncount" },
 			},

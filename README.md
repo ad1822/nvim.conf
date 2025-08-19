@@ -64,7 +64,7 @@ In Vim, many commands follow this consistent pattern:
 * **Text objects:**
 
   * `w` – word
-  * `"` – quotes
+  * `"` / `q` – quotes
   * `b` – brackets or parentheses
   * `)` – parentheses specifically
   * `}` – braces

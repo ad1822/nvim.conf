@@ -150,28 +150,29 @@ return {
 			sections = {
 				{ pane = 1, section = "header" },
 				{ pane = 1, section = "keys", indent = 1, gap = 1, padding = 1 },
-				function()
-					local in_git = Snacks.git.get_root() ~= nil
-					if not in_git then
-						return {}
-					end
-					return {
-						{
-							pane = 1,
-							icon = " ",
-							title = "Git Status  ",
-							section = "terminal",
-							enabled = function()
-								return Snacks.git.get_root() ~= nil
-							end,
-							cmd = "git status --short --branch --renames",
-							height = 5,
-							padding = 1,
-							ttl = 5 * 60,
-							indent = 3,
-						},
-					}
-				end,
+				-- { pane = 2, section = "terminal", cmd = "wakafetch --full" },
+				-- function()
+				-- 	local in_git = Snacks.git.get_root() ~= nil
+				-- 	if not in_git then
+				-- 		return {}
+				-- 	end
+				-- 	return {
+				-- 		{
+				-- 			pane = 1,
+				-- 			icon = " ",
+				-- 			title = "Git Status  ",
+				-- 			section = "terminal",
+				-- 			enabled = function()
+				-- 				return Snacks.git.get_root() ~= nil
+				-- 			end,
+				-- 			cmd = "git status --short --branch --renames",
+				-- 			height = 5,
+				-- 			padding = 1,
+				-- 			ttl = 5 * 60,
+				-- 			indent = 3,
+				-- 		},
+				-- 	}
+				-- end,
 				{ pane = 1, section = "startup", padding = 0 },
 			},
 		},

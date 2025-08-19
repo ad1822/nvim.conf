@@ -15,6 +15,7 @@ vim.wo.relativenumber = true
 
 local opt = vim.opt
 -- UI & Display
+opt.termguicolors = true
 opt.cursorline = true
 opt.scroll = 5
 opt.signcolumn = "yes"
