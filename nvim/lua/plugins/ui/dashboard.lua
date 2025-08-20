@@ -129,19 +129,19 @@ return {
 				end,
 				header = random_ascii(),
 				keys = {
-					--					{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
-					-- {
-					-- 	icon = " ",
-					-- 	key = "g",
-					-- 	desc = "Find Text",
-					-- 	action = ":lua Snacks.dashboard.pick('live_grep')",
-					-- },
-					--					{
-					-- 	icon = " ",
-					-- 	key = "r",
-					-- 	desc = "Recent Files",
-					-- 	action = ":lua Snacks.dashboard.pick('oldfiles')",
-					-- },
+					{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+					{
+						icon = " ",
+						key = "g",
+						desc = "Find Text",
+						action = ":lua Snacks.dashboard.pick('live_grep')",
+					},
+					{
+						icon = " ",
+						key = "r",
+						desc = "Recent Files",
+						action = ":lua Snacks.dashboard.pick('oldfiles')",
+					},
 					{ icon = " ", key = "s", desc = "Restore Session", section = "session" },
 					{ icon = "?", key = "SPACE", desc = "Help", action = "lua require('which-key').show()" },
 					{ icon = " ", key = "p", desc = "Projects", action = ":lua Snacks.picker.projects()" },
@@ -150,7 +150,13 @@ return {
 			sections = {
 				{ pane = 1, section = "header" },
 				{ pane = 1, section = "keys", indent = 1, gap = 1, padding = 1 },
-				-- { pane = 2, section = "terminal", cmd = "wakafetch --full" },
+				-- {
+				-- 	pane = 2,
+				-- 	section = "terminal",
+				-- 	cmd = "wakafetch ",
+				-- 	width = 100, -- 100 columns wide
+				-- 	-- height = 30, -- 30 rows tall
+				-- },
 				-- function()
 				-- 	local in_git = Snacks.git.get_root() ~= nil
 				-- 	if not in_git then
@@ -173,7 +179,7 @@ return {
 				-- 		},
 				-- 	}
 				-- end,
-				{ pane = 1, section = "startup", padding = 0 },
+				-- { pane = 1, section = "startup", padding = 0 },
 			},
 		},
 	},

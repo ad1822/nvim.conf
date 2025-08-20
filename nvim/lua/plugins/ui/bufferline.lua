@@ -4,7 +4,7 @@ return {
 	opts = {
 		options = {
 			mode = "buffers",
-			separator_style = "slant",
+			-- separator_style = "slant",
 			diagnostics = "nvim_lsp",
 			diagnostics_update_on_event = true,
 			hover = {

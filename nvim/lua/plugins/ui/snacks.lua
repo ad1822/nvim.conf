@@ -7,6 +7,14 @@ return {
 			configure = true,
 		},
 		notifier = {
+			width = {
+				min = 40,
+				max = 0.8,
+			},
+			height = {
+				min = 1,
+				max = 0.8,
+			},
 			padding = true,
 			timeout = 5000,
 			styles = "compact",

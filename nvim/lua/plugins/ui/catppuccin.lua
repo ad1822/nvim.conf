@@ -38,12 +38,12 @@ return {
 				properties = {},
 				types = {},
 				operators = {},
-				-- miscs = {}, -- Uncomment to turn off hard-coded styles
+				miscs = {}, -- Uncomment to turn off hard-coded styles
 			},
 			color_overrides = {},
 			custom_highlights = function()
 				return {
-					-- Custom Backgroup (mantle) color
+					-- Custom background (mantle) color
 					Normal = { bg = "#181825" },
 				}
 			end,
