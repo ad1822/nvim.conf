@@ -1,4 +1,4 @@
 return {
 	"wellle/context.vim",
-	enabled = true,
+	enabled = false,
 }
