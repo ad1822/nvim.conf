@@ -19,7 +19,9 @@ local function toggleTrueFalse()
 	end
 end
 
-vim.keymap.set("n", "<leader>TT", toggleTrueFalse, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>tf", toggleTrueFalse, { desc = "Toggle True False" }, { noremap = true, silent = true })
+
+vim.cmd("autocmd FileType * setlocal formatoptions-=cro")
 
 vim.wo.number = true
 vim.wo.relativenumber = true

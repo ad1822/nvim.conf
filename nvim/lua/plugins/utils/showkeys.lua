@@ -91,8 +91,8 @@ return {
 			},
 		},
 		opts = {
-			-- position = "bottom-right",
-			maxkeys = 3,
+			position = "bottom-right",
+			maxkeys = 5,
 			show_count = true,
 			winopts = {
 				focusable = true,
