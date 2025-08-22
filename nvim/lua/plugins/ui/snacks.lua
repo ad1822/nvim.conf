@@ -3,6 +3,9 @@ return {
 	priority = 1000,
 	lazy = false,
 	opts = {
+		explorer = {
+			enabled = true,
+		},
 		lazygit = {
 			configure = true,
 		},
@@ -194,6 +197,7 @@ return {
 			"folke/snacks.nvim",
 			---@type snacks.Config
 			opts = {
+				explorer = { enabled = false },
 				scroll = {},
 			},
 		},
@@ -208,6 +212,7 @@ return {
 					hidden = true,
 				},
 				explorer = {
+					enabled = false,
 					layout = {
 						auto_hide = { "input" },
 					},
