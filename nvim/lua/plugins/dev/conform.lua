@@ -14,6 +14,8 @@ return {
 				markdown = { "prettier" },
 				go = { "gofumpt", "goimports" },
 				lua = { "stylua" },
+				yaml = { "prettier" }, -- Or "yamlfmt" / "yamllint" if installed
+				qml = { "qmlformat" },
 			},
 		},
 	},
