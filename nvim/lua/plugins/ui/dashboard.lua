@@ -151,10 +151,10 @@ return {
 				{ pane = 1, section = "header" },
 				{ pane = 1, section = "keys", indent = 1, gap = 1, padding = 1 },
 				-- {
-				-- 	pane = 2,
+				-- 	pane = 1,
 				-- 	section = "terminal",
-				-- 	cmd = "wakafetch ",
-				-- 	width = 100, -- 100 columns wide
+				-- 	cmd = "wakafetch -H",
+				-- 	-- width = 100, -- 100 columns wide
 				-- 	-- height = 30, -- 30 rows tall
 				-- },
 				-- function()
