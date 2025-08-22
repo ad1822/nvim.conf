@@ -19,4 +19,9 @@ return {
 		},
 	},
 	cmd = { "Typr", "TyprStats" },
-}
+},
+	vim.schedule(function()
+		local typr = require("typr.state")
+		typr.w = 100
+		typr.h = 40
+	end)
