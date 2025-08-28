@@ -64,7 +64,7 @@ return {
 			},
 			completion = {
 				ghost_text = {
-					enabled = true,
+					enabled = false,
 					show_with_menu = false,
 				},
 				keyword = { range = "full" },
@@ -199,7 +199,7 @@ return {
 					-- end,
 
 					-- Whether to automatically show the window when new completion items are available
-					auto_show = false,
+					auto_show = true,
 
 					-- Screen coordinates of the command line
 					cmdline_position = function()

@@ -3,6 +3,14 @@ return {
 	priority = 1000,
 	lazy = false,
 	keys = {
+		-- Custom Catppuccin Color Palette Picker
+		{
+			"<leader>cp",
+			function()
+				require("color-palette").show_colors()
+			end,
+			desc = "Color Palette",
+		},
 		-- Top Pickers & Explorer
 		{
 			"<leader><space>",
@@ -684,7 +692,7 @@ return {
 			"folke/snacks.nvim",
 			---@type snacks.Config
 			opts = {
-				explorer = { enabled = false },
+				explorer = { enabled = false, replace_netrw = true },
 				scroll = {},
 			},
 		},
@@ -733,13 +741,13 @@ return {
 					},
 				},
 				telescope = {
-					reverse = false,
+					reverse = true,
 					layout = {
 						box = "horizontal",
 						backdrop = false,
 						width = 0.9,
-						height = 0.8,
-						border = "none",
+						height = 0.9,
+						border = "rounded",
 						{
 							box = "vertical",
 							{ win = "list", title = " Results ", title_pos = "center", border = "rounded" },
@@ -754,7 +762,7 @@ return {
 						{
 							win = "preview",
 							title = "{preview:Preview}",
-							width = 0.50,
+							width = 0.65,
 							border = "rounded",
 							title_pos = "center",
 						},
@@ -897,10 +905,8 @@ return {
 		-- Set 5 lines for scrolling
 		vim.keymap.set("n", "<C-d>", "5<C-d>", { noremap = true, silent = true })
 		vim.keymap.set("n", "<C-u>", "5<C-u>", { noremap = true, silent = true })
+
 		-- Enable dim by default
 		-- Snacks.toggle.dim():set(true)
 	end,
-	-- conig = function(_, opts)
-	-- 	require("snacks").setup(opts)
-	-- end,
 }
