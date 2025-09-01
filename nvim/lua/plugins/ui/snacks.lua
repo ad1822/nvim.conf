@@ -50,6 +50,7 @@ return {
 		{
 			"<leader>e",
 			function()
+				-- vim.cmd("Explorer")
 				Snacks.explorer()
 			end,
 			desc = "File Explorer",
@@ -499,7 +500,8 @@ return {
 	},
 	opts = {
 		explorer = {
-			enabled = true,
+			replace_netrw = false,
+			enabled = false,
 		},
 		lazygit = {
 			configure = true,
@@ -732,12 +734,12 @@ return {
 						{
 							win = "input",
 							height = 1,
-							border = "rounded",
+							border = "none",
 							title = "{live} ",
 							title_pos = "center",
 						},
 						{ win = "list", border = "none" },
-						{ win = "preview", title = "{preview}", height = 0.4, border = "top" },
+						{ win = "preview", title = "{preview}", height = 0.4, border = "none" },
 					},
 				},
 				telescope = {
