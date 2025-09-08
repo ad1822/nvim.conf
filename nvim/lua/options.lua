@@ -19,6 +19,8 @@ local function toggleTrueFalse()
 	end
 end
 
+vim.keymap.set("n", "<leader>te", "oif err != nil {<CR><CR>}<Esc>", { desc = "Insert Go error check" })
+
 vim.keymap.set("n", "<leader>tf", toggleTrueFalse, { desc = "Toggle True False" }, { noremap = true, silent = true })
 
 vim.cmd("autocmd FileType * setlocal formatoptions-=cro")
@@ -30,6 +32,7 @@ local opt = vim.opt
 -- UI & Display
 opt.termguicolors = true
 opt.cursorline = true
+opt.autochdir = false
 opt.scroll = 5
 opt.signcolumn = "yes"
 opt.wrap = true
