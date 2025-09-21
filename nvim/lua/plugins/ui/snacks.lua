@@ -908,6 +908,11 @@ return {
 		vim.keymap.set("n", "<C-d>", "5<C-d>", { noremap = true, silent = true })
 		vim.keymap.set("n", "<C-u>", "5<C-u>", { noremap = true, silent = true })
 
+		-- normal mode
+		vim.keymap.set({ "n", "v" }, "<leader>rg", function()
+			require("regex-palette").display_patterns()
+		end, { desc = "Regex Palette" })
+
 		-- Enable dim by default
 		-- Snacks.toggle.dim():set(true)
 	end,
