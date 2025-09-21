@@ -1,3 +1,4 @@
+local Snacks = require("snacks")
 local M = {}
 
 M.colors = {
@@ -27,11 +28,13 @@ M.colors = {
 	{ name = "Crust", hex = "#11111b" },
 }
 
--- Define highlights once, so names appear in their color
+-- Define highlights for colors and hex background
 for _, c in ipairs(M.colors) do
 	vim.api.nvim_set_hl(0, "Color_" .. c.name, { fg = c.hex })
 	local hex_hl = "Hex_" .. c.hex:gsub("#", "x")
 	vim.api.nvim_set_hl(0, hex_hl, { bg = c.hex })
+	local hex_hl_name = "Hex_" .. c.hex:gsub("#", "x")
+	vim.api.nvim_set_hl(0, hex_hl_name, { bg = c.hex, fg = "#181825" })
 end
 
 function M.show_colors()
@@ -39,7 +42,6 @@ function M.show_colors()
 
 	for idx, color in ipairs(M.colors) do
 		local item = {
-			idx = idx,
 			name = color.name,
 			hex = color.hex,
 			action = function()
@@ -47,26 +49,43 @@ function M.show_colors()
 				vim.notify("Copied " .. color.name .. " to clipboard", vim.log.levels.INFO)
 			end,
 		}
-		table.insert(items, item)
+
+		table.insert(items, {
+			text = color.name .. " " .. color.hex, -- enables search
+			formatted = color.name .. " " .. color.hex,
+			item = item, -- store original object
+			idx = idx,
+		})
 	end
 
-	Snacks.picker({
+	-- Use ui_select formatter if available
+	local format = (Snacks.picker and Snacks.picker.format and Snacks.picker.format.ui_select)
+			and Snacks.picker.format.ui_select(nil, #items)
+		or "text"
+
+	Snacks.picker.pick({
 		title = "Color Palette",
 		layout = { preset = "vscode" },
 		items = items,
-		format = function(item, _)
-			local hex_hl = "Hex_" .. item.hex:gsub("#", "x")
+		format = function(entry)
+			local hex_hl = "Hex_" .. entry.item.hex:gsub("#", "x")
 			return {
-				{ string.format("   %-60s", item.name), "Color_" .. item.name }, -- colored name
-				{ " " .. item.hex, hex_hl }, -- dim hex code
+				{ string.format("   %-60s", entry.item.name), "Color_" .. entry.item.name }, -- colored name
+				{ " " .. entry.item.hex, hex_hl }, -- hex with background + white font
 			}
 		end,
-		confirm = function(picker, item)
-			picker:norm(function()
+		actions = {
+			confirm = function(picker, selected_item)
+				if not selected_item then
+					return
+				end
 				picker:close()
-				item.action()
-			end)
-		end,
+				vim.schedule(function()
+					selected_item.item.action()
+				end)
+			end,
+		},
+		on_close = function() end,
 	})
 end
 

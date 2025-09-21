@@ -4,13 +4,6 @@ return {
 	lazy = false,
 	keys = {
 		-- Custom Catppuccin Color Palette Picker
-		{
-			"<leader>cp",
-			function()
-				require("color-palette").show_colors()
-			end,
-			desc = "Color Palette",
-		},
 		-- Top Pickers & Explorer
 		{
 			"<leader><space>",
@@ -913,6 +906,11 @@ return {
 			require("regex-palette").display_patterns()
 		end, { desc = "Regex Palette" })
 
+		vim.keymap.set("n", "<leader>cp", function()
+			require("color-palette").show_colors()
+		end, {
+			desc = "Color Palette",
+		})
 		-- Enable dim by default
 		-- Snacks.toggle.dim():set(true)
 	end,
