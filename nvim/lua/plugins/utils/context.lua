@@ -19,11 +19,11 @@ return {
 			on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
 		})
 
-		vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "#2e3440", fg = "#eceff4", bold = true })
+		vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "#1e1e2e", fg = "#eceff4", bold = true })
 
-		vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { fg = "#81a1c1" })
+		vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { fg = "#eceff4" })
 
 		-- Separator if you enable one
-		vim.api.nvim_set_hl(0, "TreesitterContextSeparator", { fg = "#88c0d0" })
+		vim.api.nvim_set_hl(0, "TreesitterContextSeparator", { fg = "#1e1e2e" })
 	end,
 }

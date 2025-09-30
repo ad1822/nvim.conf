@@ -7,7 +7,6 @@ return {
 		require("catppuccin").setup({
 			flavour = "mocha", -- latte, frappe, macchiato, mocha
 			background = { -- :h background
-				light = "latte",
 				dark = "mocha",
 			},
 			transparent_background = true, -- disables setting the background color.
@@ -44,7 +43,27 @@ return {
 			custom_highlights = function()
 				return {
 					-- Custom background (mantle) color
-					Normal = { bg = "#181825" },
+					Normal = { bg = "#11111b" },
+					NormalNC = { bg = "#11111b" },
+					NormalFloat = { bg = "#11111b" },
+					FloatBorder = { fg = "#f38ba8", bg = "#11111b" },
+
+					CursorLine = { bg = "#1a1a24" },
+					CursorColumn = { bg = "#1a1a24" },
+
+					-- Visual = { bg = "#a6e3a1", fg = "#11111b" },
+
+					ErrorMsg = { fg = "#f38ba8", bold = true },
+					WarningMsg = { fg = "#f9e2af", bold = true },
+					HintMsg = { fg = "#94e2d5" },
+					InfoMsg = { fg = "#89b4fa" },
+
+					GitSignsAdd = { fg = "#a6e3a1" },
+					GitSignsChange = { fg = "#f9e2af" },
+					GitSignsDelete = { fg = "#f38ba8" },
+
+					BlinkCmpMenu = { bg = "#11111b" },
+					BlinkCmpDoc = { bg = "#11111b" },
 				}
 			end,
 			default_integrations = true,
@@ -57,7 +76,7 @@ return {
 					enabled = true,
 				},
 				blink_cmp = {
-					style = "solid",
+					style = "bordered",
 				},
 				which_key = false,
 				gitsigns = {

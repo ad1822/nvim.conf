@@ -3,15 +3,15 @@ local Snacks = require("snacks") -- assumes snacks.nvim is installed
 local M = {}
 
 M.regex_patterns = {
-	{ text = "For grabbing word inside of quotes", value = [[:'<,'>s/"\([^"]*\)"]] },
-	{ text = "For grabbing word inside of single quotes", value = [[:'<,'>s/"\([^']*\)'"]] },
-	{ text = "For replacing double quotes to single quotes", value = [[:'<,'>s/"\([^"]*\)"/'\1']] },
-	{ text = "For replacing single quotes to double quotes", value = [[:'<,'>s/"'\([^']*\)'/"\1"]] },
+	{ text = "Grab word inside double quotes", value = [[:'<,'>s/"\([^"]*\)"/]] },
+	{ text = "Grab word inside single quotes", value = [[:'<,'>s/'\([^']*\)'/]] },
+	{ text = "Replace double quotes with single quotes", value = [[:'<,'>s/"\([^"]*\)"/'\1']] },
+	{ text = "Replace single quotes with double quotes", value = [[:'<,'>s/'\([^']*\)'/"\1"]] },
 	{ text = "Surround word with double quotes", value = [[:'<,'>s/\(\w\+\)/"\1"]] },
 	{ text = "Surround word with single quotes", value = [[:'<,'>s/\(\w\+\)/'\1']] },
 	{ text = "Remove everything inside quotes", value = [[:'<,'>s/"[^"]*"/"""]] },
-	{ text = "Capture first word in line", value = [[:'<,'>s/\(\w\+\)/\1]] },
-	{ text = "Capture last word in line", value = [[:'<,'>s/\(\S\+\)$/\1]] },
+	{ text = "Capture first word in line", value = [[:'<,'>s/\(\w\+\)/]] },
+	{ text = "Capture last word in line", value = [[:'<,'>s/\(\S\+\)$/]] },
 }
 
 function M.display_patterns()
