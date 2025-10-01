@@ -46,7 +46,7 @@ return {
 					Normal = { bg = "#11111b" },
 					NormalNC = { bg = "#11111b" },
 					NormalFloat = { bg = "#11111b" },
-					FloatBorder = { fg = "#f38ba8", bg = "#11111b" },
+					FloatBorder = { fg = "#45475a", bg = "#11111b" },
 
 					CursorLine = { bg = "#1a1a24" },
 					CursorColumn = { bg = "#1a1a24" },
