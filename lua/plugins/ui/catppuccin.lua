@@ -9,7 +9,7 @@ return {
 			background = { -- :h background
 				dark = "mocha",
 			},
-			transparent_background = true, -- disables setting the background color.
+			transparent_background = false, -- disables setting the background color.
 			float = {
 				transparent = true, -- enable transparent floating windows
 				solid = true, -- use solid styling for floating windows, see |winborder|
@@ -43,10 +43,10 @@ return {
 			custom_highlights = function()
 				return {
 					-- Custom background (mantle) color
-					Normal = { bg = "#11111b" },
-					NormalNC = { bg = "#11111b" },
-					NormalFloat = { bg = "#11111b" },
-					FloatBorder = { fg = "#45475a", bg = "#11111b" },
+					Normal = { bg = "#0b0c14" },
+					NormalNC = { bg = "#0b0c14" },
+					NormalFloat = { bg = "#0b0c14" },
+					FloatBorder = { fg = "#45475a", bg = "#0b0c14" },
 
 					CursorLine = { bg = "#1a1a24" },
 					CursorColumn = { bg = "#1a1a24" },

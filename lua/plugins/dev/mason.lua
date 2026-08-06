@@ -1,10 +1,10 @@
 return {
 	{
-		"williamboman/mason.nvim",
+		"mason-org/mason.nvim",
 		opts = {
 			ensure_installed = {
 				-- Javascript/TypeScript
-				"typescript-language-server",
+				"vtsls",
 				"prettierd",
 				-- Python
 				"pyright",
